@@ -4,7 +4,7 @@ const NavBar = () => {
     return (
         <div className="navbar shadow-sm px-4">
             <div className="flex-1">
-                <a className="text-xl font-bold">CS - Ticket System</a>
+                <a className="text-xl font-bold">CS — Ticket System</a>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal px-1 flex items-center gap-2">

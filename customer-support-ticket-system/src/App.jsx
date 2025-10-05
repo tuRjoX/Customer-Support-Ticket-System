@@ -3,6 +3,7 @@ import CustomerTicket from "./Components/CustomerTicket/CustomerTicket";
 import NavBar from "./Components/NavBar/NavBar";
 import TwoCard from "./Components/TwoCard/TwoCard";
 import TaskStatus from "./Components/TaskStatus/TaskStatus";
+import Links from "./Components/Links/Links";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
           </div>
         </div>
       )}
+      <Links></Links>
     </>
   );
 }
