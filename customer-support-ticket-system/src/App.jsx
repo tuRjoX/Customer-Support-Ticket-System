@@ -2,11 +2,15 @@ import "./App.css";
 import CustomerTicket from "./Components/CustomerTicket/CustomerTicket";
 import NavBar from "./Components/NavBar/NavBar";
 import TwoCard from "./Components/TwoCard/TwoCard";
+import TaskStatus from "./Components/TaskStatus/TaskStatus";
 import { useState, useEffect } from "react";
 
 function App() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTickets, setSelectedTickets] = useState([]);
+  const [inProgressCount, setInProgressCount] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
 
   const fetchTickets = async () => {
     try {
@@ -20,6 +24,26 @@ function App() {
     }
   };
 
+  const handleSelectTicket = (ticket) => {
+    // Check if ticket is already selected
+    if (selectedTickets.find((t) => t.id === ticket.id)) {
+      alert("Ticket is already selected!");
+      return;
+    }
+
+    setSelectedTickets((prev) => [...prev, ticket]);
+    setInProgressCount((prev) => prev + 1);
+    alert(`Ticket "${ticket.title}" added to Task Status!`);
+  };
+
+  const handleCompleteTicket = (ticketId) => {
+    setSelectedTickets((prev) =>
+      prev.filter((ticket) => ticket.id !== ticketId)
+    );
+    setInProgressCount((prev) => prev - 1);
+    setCompletedCount((prev) => prev + 1);
+  };
+
   useEffect(() => {
     fetchTickets();
   }, []);
@@ -27,14 +51,36 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-      <TwoCard></TwoCard>
+      <TwoCard
+        inProgressCount={inProgressCount}
+        completedCount={completedCount}
+      ></TwoCard>
       {loading ? (
         <div className="text-center mt-20">Loading tickets...</div>
       ) : (
-        <div className="grid grid-cols-2 gap-6 justify-items-center mt-20 max-w-6xl mx-auto px-4">
-          {tickets.map((ticket) => (
-            <CustomerTicket key={ticket.id} ticket={ticket} />
-          ))}
+        <div className="flex gap-6 mt-16 max-w-7xl mx-auto px-4">
+          {/* Customer Tickets Section */}
+          <div className="flex-1">
+            <h2 className="text-2xl font-semibold mb-6">Customer Tickets</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {tickets.map((ticket) => (
+                <CustomerTicket
+                  key={ticket.id}
+                  ticket={ticket}
+                  onSelectTicket={handleSelectTicket}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Task Status Section */}
+          <div className="w-80">
+          <h2 className="text-xl font-semibold mb-8">Task Status</h2>
+            <TaskStatus
+              selectedTickets={selectedTickets}
+              onCompleteTicket={handleCompleteTicket}
+            />
+          </div>
         </div>
       )}
     </>
