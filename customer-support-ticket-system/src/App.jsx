@@ -9,6 +9,7 @@ function App() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTickets, setSelectedTickets] = useState([]);
+  const [resolvedTickets, setResolvedTickets] = useState([]);
   const [inProgressCount, setInProgressCount] = useState(0);
   const [completedCount, setCompletedCount] = useState(0);
 
@@ -25,7 +26,6 @@ function App() {
   };
 
   const handleSelectTicket = (ticket) => {
-    // Check if ticket is already selected
     if (selectedTickets.find((t) => t.id === ticket.id)) {
       alert("Ticket is already selected!");
       return;
@@ -37,11 +37,19 @@ function App() {
   };
 
   const handleCompleteTicket = (ticketId) => {
-    setSelectedTickets((prev) =>
-      prev.filter((ticket) => ticket.id !== ticketId)
+    const completedTicket = selectedTickets.find(
+      (ticket) => ticket.id === ticketId
     );
-    setInProgressCount((prev) => prev - 1);
-    setCompletedCount((prev) => prev + 1);
+
+    if (completedTicket) {
+      setSelectedTickets((prev) =>
+        prev.filter((ticket) => ticket.id !== ticketId)
+      );
+      setResolvedTickets((prev) => [...prev, completedTicket]);
+      setTickets((prev) => prev.filter((ticket) => ticket.id !== ticketId));
+      setInProgressCount((prev) => prev - 1);
+      setCompletedCount((prev) => prev + 1);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +69,9 @@ function App() {
         <div className="flex gap-6 mt-16 max-w-7xl mx-auto px-4">
           {/* Customer Tickets Section */}
           <div className="flex-1">
-            <h2 className="text-2xl font-semibold mb-6">Customer Tickets</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-[#34485A]">
+              Customer Tickets
+            </h2>
             <div className="grid grid-cols-2 gap-4">
               {tickets.map((ticket) => (
                 <CustomerTicket
@@ -75,9 +85,12 @@ function App() {
 
           {/* Task Status Section */}
           <div className="w-80">
-          <h2 className="text-xl font-semibold mb-8">Task Status</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-[#34485A]">
+              Task Status
+            </h2>
             <TaskStatus
               selectedTickets={selectedTickets}
+              resolvedTickets={resolvedTickets}
               onCompleteTicket={handleCompleteTicket}
             />
           </div>

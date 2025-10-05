@@ -4,7 +4,7 @@ const NavBar = () => {
     return (
         <div className="navbar shadow-sm px-4">
             <div className="flex-1">
-                <a className="text-xl">CS - Ticket System</a>
+                <a className="text-xl font-bold">CS - Ticket System</a>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal px-1 flex items-center gap-2">
@@ -28,7 +28,7 @@ const NavBar = () => {
                     </li>
                     <li>
                         <a className="btn bg-gradient-to-r from-[#632EE3] to-[#9F62F2] hover:opacity-90 transition border-0">
-                            + Button
+                            + New Ticket
                         </a>
                     </li>
                 </ul>
