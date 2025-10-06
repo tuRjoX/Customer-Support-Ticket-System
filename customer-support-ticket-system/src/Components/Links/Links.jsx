@@ -7,7 +7,7 @@ import MailIcon from '../../assets/m.png';
 const Links = () => {
     return (
         <div>
-            <div className="flex gap-8 bg-black text-white p-10 mt-20 justify-between px-20">
+            <div className="flex flex-col md:flex-row gap-8 bg-black text-white p-10 mt-20 justify-between md:px-20">
                 <div>
                     <h1 className='text-lg font-semibold'>CS — Ticket System</h1>
                     <p className='text-[#A1A1AA] w-[350px]'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>

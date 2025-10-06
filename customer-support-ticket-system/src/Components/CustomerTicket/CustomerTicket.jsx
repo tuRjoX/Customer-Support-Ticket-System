@@ -49,12 +49,14 @@ const CustomerTicket = ({ ticket, onSelectTicket }) => {
 
   return (
     <div
-      className="ticket-card bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+      className="ticket-card bg-white p-4 sm:p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow w-full"
       onClick={handleCardClick}
     >
       <div>
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-lg font-semibold">{ticket.title}</h1>
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 sm:mb-4 gap-2 sm:gap-0">
+          <h1 className="text-base sm:text-lg font-semibold leading-tight">
+            {ticket.title}
+          </h1>
           <p
             className={`text-gray-500 text-sm ${getStatusColor(
               ticket.status
@@ -70,22 +72,20 @@ const CustomerTicket = ({ ticket, onSelectTicket }) => {
             {ticket.status}
           </p>
         </div>
-        <p className="text-gray-500 text-sm mb-4">{ticket.description}</p>
-        <div className="flex gap-10 mt-2">
-          <p className="text-gray-500">{ticket.id}</p>
-          <p
-            className={`text-gray-500 ${getPriorityColor(
-              ticket.priority
-            )} text-sm`}
-          >
+        <p className="text-gray-500 text-sm mb-3 sm:mb-4 line-clamp-3">
+          {ticket.description}
+        </p>
+        <div className="flex flex-wrap gap-2 sm:gap-4 lg:gap-6 mt-2 text-xs sm:text-sm">
+          <p className="text-gray-500 font-medium">{ticket.id}</p>
+          <p className={`${getPriorityColor(ticket.priority)} font-medium`}>
             {ticket.priority.toUpperCase()}
           </p>
-          <p className="text-gray-500 text-sm">{ticket.assignee}</p>
+          <p className="text-gray-500">{ticket.assignee}</p>
           <p className="text-gray-500 flex items-center">
             <img
               src={Calender}
               alt="Calendar"
-              className="inline-block mr-1 w-[20px] h-[20px]"
+              className="inline-block mr-1 w-4 h-4 sm:w-[20px] sm:h-[20px]"
             />
             {new Date(ticket.date).toLocaleDateString()}
           </p>
