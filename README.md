@@ -1,6 +1,6 @@
 # Customer-Support-Ticket-System
 
-# Live Link: [Customer-Support-Ticket-System](cs-ticket-system.pages.dev)
+# Live Link: cs-ticket-system.pages.dev
 
 ## What is JSX, and Why is it Used?
 
