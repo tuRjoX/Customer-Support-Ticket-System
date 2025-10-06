@@ -4,8 +4,8 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="navbar shadow-sm px-2 sm:px-4 sticky top-0 bg-white z-50">
-      <div className="flex-1">
+    <div className="navbar shadow-sm px-2 sm:px-4 sticky top-0 bg-white z-50 w-full max-w-full overflow-x-hidden">
+      <div className="flex-1 min-w-0">
         <a className="text-base sm:text-lg lg:text-xl font-bold truncate">
           CS — Ticket System
         </a>

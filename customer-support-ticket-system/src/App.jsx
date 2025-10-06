@@ -5,8 +5,7 @@ import TwoCard from "./Components/TwoCard/TwoCard";
 import TaskStatus from "./Components/TaskStatus/TaskStatus";
 import Links from "./Components/Links/Links";
 import { useState, useEffect } from "react";
-import { ToastContainer,toast } from 'react-toastify';
-
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const [tickets, setTickets] = useState([]);
@@ -60,7 +59,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen overflow-x-hidden">
       <NavBar></NavBar>
       <TwoCard
         inProgressCount={inProgressCount}
@@ -101,7 +100,7 @@ function App() {
       )}
       <Links></Links>
       <ToastContainer />
-    </>
+    </div>
   );
 }
 
