@@ -1,10 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navRef = useRef(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
-    <div className="navbar shadow-sm px-2 sm:px-4 sticky top-0 bg-white z-50 w-full max-w-full overflow-x-hidden">
+    <div
+      ref={navRef}
+      className="navbar shadow-sm px-2 sm:px-4 sticky top-0 bg-white z-50 w-full max-w-full"
+    >
       <div className="flex-1 min-w-0">
         <a className="text-base sm:text-lg lg:text-xl font-bold truncate">
           CS — Ticket System
@@ -67,27 +90,55 @@ const NavBar = () => {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t z-50 md:hidden">
+        <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-40 md:hidden">
           <ul className="menu menu-vertical p-2">
             <li>
-              <a className="hover:bg-gray-100 rounded-md px-3 py-2">Home</a>
+              <a
+                className="hover:bg-gray-100 rounded-md px-3 py-2 block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </a>
             </li>
             <li>
-              <a className="hover:bg-gray-100 rounded-md px-3 py-2">FAQ</a>
+              <a
+                className="hover:bg-gray-100 rounded-md px-3 py-2 block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                FAQ
+              </a>
             </li>
             <li>
-              <a className="hover:bg-gray-100 rounded-md px-3 py-2">
+              <a
+                className="hover:bg-gray-100 rounded-md px-3 py-2 block"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Changelog
               </a>
             </li>
             <li>
-              <a className="hover:bg-gray-100 rounded-md px-3 py-2">Blog</a>
+              <a
+                className="hover:bg-gray-100 rounded-md px-3 py-2 block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </a>
             </li>
             <li>
-              <a className="hover:bg-gray-100 rounded-md px-3 py-2">Download</a>
+              <a
+                className="hover:bg-gray-100 rounded-md px-3 py-2 block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Download
+              </a>
             </li>
             <li>
-              <a className="hover:bg-gray-100 rounded-md px-3 py-2">Contact</a>
+              <a
+                className="hover:bg-gray-100 rounded-md px-3 py-2 block"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </a>
             </li>
           </ul>
         </div>
